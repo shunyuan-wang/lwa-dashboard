@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>輕質粒料月報 2026-06-01</title>
+<style>
+  :root{
+    --bg:#f5f7fa; --card:#ffffff; --ink:#1f2a37; --muted:#6b7280;
+    --line:#e5e7eb; --brand:#0f766e; --brand2:#14b8a6; --shadow:0 1px 3px rgba(0,0,0,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  header{background:linear-gradient(135deg,#0f766e,#14b8a6);color:#fff;padding:32px 20px 28px;text-align:center}
+  header h1{font-size:1.9rem;font-weight:800;letter-spacing:.5px}
+  header .date{margin-top:8px;font-size:1rem;opacity:.95;font-weight:600}
+  header .note{margin-top:10px;font-size:.8rem;opacity:.85;max-width:720px;margin-left:auto;margin-right:auto}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 16px 80px}
+  .filters{position:sticky;top:0;z-index:20;background:rgba(245,247,250,.92);backdrop-filter:blur(6px);
+    display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:16px 8px;border-bottom:1px solid var(--line)}
+  .filters button{border:1px solid var(--line);background:#fff;color:var(--ink);padding:7px 16px;border-radius:999px;
+    font-size:.88rem;cursor:pointer;transition:all .18s;font-family:inherit;font-weight:600}
+  .filters button:hover{border-color:var(--brand2);color:var(--brand)}
+  .filters button.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+  section{margin-top:34px}
+  .sec-title{font-size:1.3rem;font-weight:800;padding-bottom:10px;border-bottom:3px solid var(--brand);
+    display:inline-block;margin-bottom:18px}
+  .sec-title .count{font-size:.95rem;color:var(--muted);font-weight:600}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
+  .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;
+    box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s;display:flex;flex-direction:column}
+  .card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(15,118,110,.16);border-color:var(--brand2)}
+  .card h3{font-size:1.02rem;line-height:1.45;margin-bottom:10px;padding-right:64px}
+  .card h3 a{color:var(--ink);text-decoration:none}
+  .card h3 a:hover{color:var(--brand);text-decoration:underline}
+  .meta{font-size:.78rem;color:var(--muted);margin-bottom:8px}
+  .meta .src{font-weight:700;color:var(--brand)}
+  .summary{font-size:.9rem;color:#374151;margin-top:auto}
+  .tag{position:absolute;top:14px;right:14px;font-size:.72rem;font-weight:700;color:#fff;padding:3px 10px;border-radius:999px}
+  .t-eu{background:#2563eb}.t-us{background:#dc2626}.t-jp{background:#db2777}
+  .t-cn{background:#ea580c}.t-tw{background:#16a34a}.t-global{background:#6b7280}
+  .empty{padding:28px;text-align:center;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:14px}
+  .disclaimer{margin-top:36px;font-size:.8rem;color:var(--muted);background:#fff;border:1px solid var(--line);
+    border-radius:12px;padding:16px 18px}
+  #toTop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:none;
+    background:var(--brand);color:#fff;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.2);
+    opacity:0;pointer-events:none;transition:opacity .25s}
+  #toTop.show{opacity:1;pointer-events:auto}
+  .hidden{display:none!important}
+</style>
+</head>
+<body>
+<header>
+  <h1>每月產業資訊看板</h1>
+  <div class="date">資料更新日期：2026-06-01</div>
+  <div class="note">輕質粒料（Lightweight Aggregate）產業情報 ｜ 資料來源涵蓋歐洲、美國、日本、中國、台灣，限過去 1 個月內發布</div>
+</header>
+
+<div class="filters" id="filters">
+  <button data-region="all" class="active">全部</button>
+  <button data-region="eu">歐洲</button>
+  <button data-region="us">美國</button>
+  <button data-region="jp">日本</button>
+  <button data-region="cn">中國</button>
+  <button data-region="tw">台灣</button>
+  <button data-region="global">全球</button>
+</div>
+
+<div class="wrap">
+
+  <section data-section="peer">
+    <div class="sec-title">同業動態 <span class="count">（<span class="sec-count"></span> 則）</span></div>
+    <div class="grid"></div>
+  </section>
+
+  <section data-section="research">
+    <div class="sec-title">最新研究文獻 <span class="count">（<span class="sec-count"></span> 則）</span></div>
+    <div class="grid"></div>
+  </section>
+
+  <section data-section="market">
+    <div class="sec-title">應用效益及市場 <span class="count">（<span class="sec-count"></span> 則）</span></div>
+    <div class="grid"></div>
+  </section>
+
+  <div class="disclaimer">
+    <strong>資料說明：</strong>本月嚴格符合「過去 1 個月內（2026 年 5 月）發布」的內容以歐洲同業動態最為豐富。
+    研究文獻與市場區塊中，部分項目為近期（2026 年 1–4 月）發布的最新可查證內容，已於各卡片標註實際發布日期供判讀；
+    日期無法精確確認者標示「日期待確認」。美國、日本、中國、台灣於本嚴格區間多為既有案例或趨勢綜述，故同業動態以歐洲為主。
+  </div>
+</div>
+
+<button id="toTop" title="回到頂部">↑</button>
+
+<script>
+const DATA = {
+  peer: [
+    {title:"Laterlite 推出 CentroStorico 化學連接器稀釋劑", src:"Edilportale", url:"https://www.edilportale.com/news/2026/05/aziende/laterlite-presenta-diluente-connettore-chimico-centrostorico_110510_5.html", date:"2026-05-25", region:"eu", summary:"為結構補強系統推出環氧樹脂稀釋劑，改善 5–25°C 下大規模樓板修復的流動性與可施作性。"},
+    {title:"Laterlite 發布樓板結構補強新技術手冊", src:"Edilportale", url:"https://www.edilportale.com/news/2026/05/aziende/laterlite-presenta-la-nuova-guida-sul-consolidamento-dei-solai_110405_5.html", date:"2026-05-18", region:"eu", summary:"推出既有建物樓板補強設計指南，協助工程師選用輕質膨脹黏土補強方案。"},
+    {title:"Leca UK 取得倫敦 Old Oak Common 車站輕質骨材指定案", src:"Leca UK / Saint-Gobain", url:"https://www.leca.co.uk/", date:"2026-05-12", region:"eu", summary:"LWA 獲指定用於倫敦 Old Oak Common 車站，作為大型基建減載與穩定填料新應用。"},
+    {title:"Leca UK 向建材通路與 DIY 零售商推廣產品線", src:"Leca UK", url:"https://www.leca.co.uk/news/", date:"2026-05-05", region:"eu", summary:"向英國經銷商及 DIY 零售通路推廣易用型輕質骨材建材，擴大零售端應用。"},
+    {title:"Laterlite（Nord Resine）推出 Beton Tack 附著底漆", src:"Edilportale", url:"https://www.edilportale.com/news/2026/05/aziende/laterlite-presenta-nord-resine-beton-tack_110202_5.html", date:"2026-05-04", region:"eu", summary:"即用型顆粒感附著底漆，適用低吸收或非吸收性基材之住宅、工業與商業場域。"},
+    {title:"Laterlite 應用於米蘭古蹟建築改建為奢華飯店", src:"Edilportale", url:"https://www.edilportale.com/news/2026/05/aziende/laterlite-per-la-trasformazione-di-un-palazzo-milanese-in-hotel-di-lusso_110292_5.html", date:"2026-05（日期待確認）", region:"eu", summary:"輕質膨脹黏土材料用於米蘭歷史建築改建奢華飯店，屬古蹟修復新使用案例。"},
+    {title:"Laterlite 與 BigMat-Cianciosi 合辦施工教育訓練活動", src:"TermoliOnLine.it", url:"https://termolionline.it/2026/05/buone-imprese/costruire-meglio-per-vivere-meglio-formazione-sicurezza-e-innovazione-al-centro-dellevento-laterlite-promosso-dalla-buona-impresa-bigmat-cianciosi/", date:"2026-05（日期待確認）", region:"eu", summary:"主辦聚焦施工教育、安全與創新的產業活動，推廣其輕質粒料系統。"}
+  ],
+  research: [
+    {title:"工業廢料製人工骨材於永續營建：系統性回顧", src:"Frontiers in Built Environment", url:"https://www.frontiersin.org/journals/built-environment/articles/10.3389/fbuil.2026.1746167/full", date:"2026-03-06", region:"global", summary:"回顧飛灰、高爐渣、鋼渣、稻殼灰、營建廢料製人工骨材，比重較傳統低 15–30% 並可固化重金屬。"},
+    {title:"污泥熱處理製人工骨材之批判性回顧", src:"Environmental Technology & Innovation（ScienceDirect）", url:"https://www.sciencedirect.com/science/article/pii/S2589014X26001167", date:"2026-02（日期待確認）", region:"global", summary:"從環境表現與循環生物經濟角度，批判性回顧污泥熱處理轉化為人工骨材的製程。"},
+    {title:"高強度飛灰陶粒輕質混凝土彈性模數模型", src:"Int. J. Concrete Structures and Materials（Springer）", url:"https://link.springer.com/article/10.1186/s40069-026-00890-9", date:"2026（月份待確認）", region:"cn", summary:"飛灰陶粒每 m³ 可吸納 200–400 kg 工業固廢，輕量結構預期降隱含碳 10–15%。"},
+    {title:"餵食時間最佳化提升魚菜共生表現（鯉魚＋生菜）", src:"Agriculture, MDPI", url:"https://www.mdpi.com/2077-0472/16/1/122", date:"2026-01-03", region:"eu", summary:"以膨脹黏土為介質，調整餵食時間可提升鯉魚成長、生菜產量與水質。"}
+  ],
+  market: [
+    {title:"商業綠建築市場展望 2026–2034", src:"GlobeNewswire / Research and Markets", url:"https://www.globenewswire.com/news-release/2026/05/13/3293966/28124/en/commercial-green-construction-market-outlook-2026-2034.html", date:"2026-05-13", region:"global", summary:"2034 年達 1.97 兆美元（CAGR 8.6%），採購轉向 LCA 與低隱含碳材料，與輕量低碳骨材需求直接相關。"},
+    {title:"輕量化材料研究報告 2026：市場 2,644.8 億美元", src:"GlobeNewswire / Research and Markets", url:"https://www.globenewswire.com/news-release/2026/04/24/3280678/28124/en/lightweight-materials-research-report-2026-264-48-bn-market-opportunities-trends-competitive-landscape-strategies-and-forecasts-2020-2025-2025-2030f-2035f.html", date:"2026-04-24", region:"global", summary:"全球輕量化材料市場規模報告，含建材輕量化趨勢與減碳驅動。"},
+    {title:"建築骨材市場 2033 年將達 8,754 億美元", src:"PR Newswire / Persistence Market Research", url:"https://www.prnewswire.com/news-releases/construction-aggregates-market-to-reach-us-875-4-billion-by-2033-driven-by-infrastructure-expansion-and-sustainable-material-adoption---persistence-market-research-302747139.html", date:"2026-04-20", region:"global", summary:"2033 年達 8,754 億美元（CAGR 6.7%），強調回收骨材與永續材料採用、EU CBAM 推動低碳骨材。"},
+    {title:"輕質骨材混凝土市場以 8.6% CAGR 加速成長", src:"openPR / Verified Market Reports", url:"https://www.openpr.com/news/4499771/lightweight-aggregate-concrete-market-size-accelerates-at-8-6", date:"2026-04~05（日期待確認）", region:"global", summary:"2024 年 118 億、2033 年 245 億美元（CAGR 8.6%），由永續法規與綠色營建資本驅動。"},
+    {title:"輕質混凝土市場分析 2026–2035", src:"IndexBox", url:"https://www.indexbox.io/blog/lightweight-concrete-market-forecast-points-higher-toward-2035-driven-by-urbanization-and-green-building-codes/", date:"2026-02-22", region:"global", summary:"2026–2035 CAGR 5.2%，成長動力為建築節能法規（R 值）與都市化，輕質骨材兼具結構與隔熱。"}
+  ]
+};
+
+const TAGNAME={eu:"歐洲",us:"美國",jp:"日本",cn:"中國",tw:"台灣",global:"全球"};
+
+function cardHTML(item){
+  return `<article class="card" data-region="${item.region}">
+    <span class="tag t-${item.region}">${TAGNAME[item.region]}</span>
+    <h3><a href="${item.url}" target="_blank" rel="noopener">${item.title}</a></h3>
+    <div class="meta"><span class="src">${item.src}</span> ｜ ${item.date}</div>
+    <p class="summary">${item.summary}</p>
+  </article>`;
+}
+
+document.querySelectorAll('section[data-section]').forEach(sec=>{
+  const key=sec.dataset.section;
+  const grid=sec.querySelector('.grid');
+  const items=DATA[key]||[];
+  if(items.length===0){
+    grid.innerHTML='<div class="empty">本月暫無新消息</div>';
+  }else{
+    grid.innerHTML=items.map(cardHTML).join('');
+  }
+  sec.querySelector('.sec-count').textContent=items.length;
+});
+
+const filters=document.getElementById('filters');
+filters.addEventListener('click',e=>{
+  if(e.target.tagName!=='BUTTON')return;
+  filters.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active');
+  const r=e.target.dataset.region;
+  document.querySelectorAll('.card').forEach(c=>{
+    c.classList.toggle('hidden', r!=='all' && c.dataset.region!==r);
+  });
+  document.querySelectorAll('section[data-section]').forEach(sec=>{
+    const visible=sec.querySelectorAll('.card:not(.hidden)').length;
+    sec.querySelector('.sec-count').textContent = r==='all' ? (DATA[sec.dataset.section]||[]).length : visible;
+  });
+});
+
+const toTop=document.getElementById('toTop');
+window.addEventListener('scroll',()=>toTop.classList.toggle('show',window.scrollY>400));
+toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+</script>
+</body>
+</html>
