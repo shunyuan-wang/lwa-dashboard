@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>輕質粒料月報 2026-08-01</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --eu:#2563eb; --us:#dc2626; --jp:#db2777; --cn:#ea580c;
+    --tw:#16a34a; --me:#7c3aed; --global:#6b7280;
+    --bg:#f1f5f9; --card:#ffffff; --ink:#0f172a; --sub:#475569;
+    --line:#e2e8f0; --accent:#0e7490; --accent2:#0891b2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Noto Sans TC',system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* Header */
+  header{
+    background:linear-gradient(135deg,#0e7490 0%,#0891b2 50%,#155e75 100%);
+    color:#fff; padding:34px 20px 30px; text-align:center;
+  }
+  header h1{font-size:2rem;font-weight:900;letter-spacing:.5px}
+  header .sub{font-size:1.05rem;font-weight:500;opacity:.95;margin-top:6px}
+  header .date{font-size:.9rem;opacity:.85;margin-top:12px}
+  .stats{
+    display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:20px;
+  }
+  .stat{
+    background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);
+    border-radius:14px;padding:12px 18px;min-width:120px;backdrop-filter:blur(4px);
+  }
+  .stat .n{font-size:1.7rem;font-weight:900;line-height:1}
+  .stat .l{font-size:.8rem;opacity:.92;margin-top:5px}
+  header .note{font-size:.78rem;opacity:.8;margin-top:16px;max-width:760px;margin-left:auto;margin-right:auto}
+
+  /* Filter bar */
+  .filters{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    padding:12px 16px 12px;box-shadow:0 2px 10px rgba(0,0,0,.04);
+  }
+  .filter-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:8px}
+  .filter-row:last-of-type{margin-bottom:10px}
+  .flabel{font-size:.72rem;font-weight:700;color:var(--sub);margin-right:2px}
+  .chip{
+    border:1px solid var(--line);background:#fff;color:var(--sub);
+    border-radius:999px;padding:6px 14px;font-size:.83rem;font-weight:500;
+    cursor:pointer;transition:all .16s ease;font-family:inherit;
+  }
+  .chip:hover{border-color:var(--accent);color:var(--accent)}
+  .chip.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+  .chip.region.active{color:#fff}
+  .chip[data-region="eu"].active{background:var(--eu);border-color:var(--eu)}
+  .chip[data-region="us"].active{background:var(--us);border-color:var(--us)}
+  .chip[data-region="jp"].active{background:var(--jp);border-color:var(--jp)}
+  .chip[data-region="cn"].active{background:var(--cn);border-color:var(--cn)}
+  .chip[data-region="tw"].active{background:var(--tw);border-color:var(--tw)}
+  .chip[data-region="me"].active{background:var(--me);border-color:var(--me)}
+  .chip[data-region="global"].active{background:var(--global);border-color:var(--global)}
+  .search-wrap{display:flex;justify-content:center}
+  .search-wrap input{
+    width:min(460px,90%);border:1px solid var(--line);border-radius:999px;
+    padding:9px 16px;font-size:.9rem;font-family:inherit;outline:none;transition:border-color .16s;
+  }
+  .search-wrap input:focus{border-color:var(--accent)}
+
+  /* Main */
+  main{max-width:1180px;margin:0 auto;padding:26px 16px 60px}
+  .section{margin-bottom:34px}
+  .section-head{
+    display:flex;align-items:center;gap:10px;margin-bottom:14px;
+    padding-bottom:8px;border-bottom:2px solid var(--line);
+  }
+  .section-head h2{font-size:1.28rem;font-weight:900}
+  .section-head .bar{width:5px;height:22px;border-radius:3px;background:var(--accent)}
+  .section-head .cnt{
+    margin-left:auto;font-size:.8rem;font-weight:600;color:var(--sub);
+    background:#e0f2fe;color:#0369a1;padding:3px 11px;border-radius:999px;
+  }
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+
+  /* Card */
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 16px 15px;position:relative;transition:transform .18s ease,box-shadow .18s ease;
+    display:flex;flex-direction:column;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(15,23,42,.12)}
+  .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:9px}
+  .date-badge{
+    font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:7px;
+    background:#0f172a;color:#fff;white-space:nowrap;
+  }
+  .date-badge.soft{background:#e2e8f0;color:#64748b}
+  .date-badge .pin{margin-right:2px}
+  .region-tag{
+    font-size:.72rem;font-weight:700;color:#fff;padding:3px 10px;border-radius:999px;white-space:nowrap;
+  }
+  .card h3{font-size:1rem;font-weight:700;line-height:1.4;margin-bottom:8px}
+  .card h3 a{transition:color .15s}
+  .card h3 a:hover{color:var(--accent)}
+  .card .src{font-size:.8rem;font-weight:500;color:var(--accent2);margin-bottom:8px}
+  .card .src a:hover{text-decoration:underline}
+  .card .sum{font-size:.86rem;color:var(--sub);line-height:1.62}
+  .card .src .ext{font-size:.7rem;opacity:.7}
+
+  .empty{
+    text-align:center;padding:50px 20px;color:var(--sub);font-size:1rem;
+    background:#fff;border:1px dashed var(--line);border-radius:14px;
+  }
+  .hidden{display:none !important}
+
+  /* Back to top */
+  #toTop{
+    position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;
+    background:var(--accent);color:#fff;border:none;font-size:1.3rem;cursor:pointer;
+    box-shadow:0 6px 18px rgba(14,116,144,.4);opacity:0;pointer-events:none;
+    transition:opacity .25s,transform .2s;z-index:60;
+  }
+  #toTop.show{opacity:1;pointer-events:auto}
+  #toTop:hover{transform:translateY(-3px)}
+
+  /* Footer */
+  footer{
+    max-width:1180px;margin:0 auto;padding:22px 20px 50px;color:var(--sub);
+    font-size:.78rem;line-height:1.7;border-top:1px solid var(--line);
+  }
+  footer b{color:var(--ink)}
+  footer .legend{display:flex;gap:14px;flex-wrap:wrap;margin:10px 0}
+  footer .legend span{display:inline-flex;align-items:center;gap:5px}
+  footer .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+
+  @media(max-width:640px){
+    header h1{font-size:1.5rem}
+    .grid{grid-template-columns:1fr}
+    .stat{min-width:calc(50% - 8px);padding:10px}
+    .stat .n{font-size:1.4rem}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>每月產業資訊看板</h1>
+  <div class="sub">輕質粒料（Lightweight Aggregate）產業情報</div>
+  <div class="date">資料更新日期：2026-08-01　｜　涵蓋期間：2026 年 7 月為主（近 3 月重要內容加註 📌）</div>
+  <div class="stats">
+    <div class="stat"><div class="n" id="s-peer">14</div><div class="l">同業動態</div></div>
+    <div class="stat"><div class="n" id="s-research">14</div><div class="l">最新研究文獻</div></div>
+    <div class="stat"><div class="n" id="s-market">15</div><div class="l">應用效益及市場</div></div>
+    <div class="stat"><div class="n" id="s-equip">15</div><div class="l">製程設備及耐火材料</div></div>
+  </div>
+  <div class="note">資料來源涵蓋歐洲、美國、日本、中國、台灣及中東地區，以過去 1 個月內發布為優先；市場報告與常青技術頁若逾 3 個月但具代表性者，標記「📌 精選收錄」。</div>
+</header>
+
+<div class="filters">
+  <div class="filter-row" id="secFilters">
+    <span class="flabel">區塊</span>
+    <button class="chip section active" data-section="all">全部</button>
+    <button class="chip section" data-section="peer">同業動態</button>
+    <button class="chip section" data-section="research">最新研究文獻</button>
+    <button class="chip section" data-section="market">應用效益及市場</button>
+    <button class="chip section" data-section="equip">製程設備及耐火材料</button>
+  </div>
+  <div class="filter-row" id="regFilters">
+    <span class="flabel">地區</span>
+    <button class="chip region active" data-region="all">全部</button>
+    <button class="chip region" data-region="eu">歐洲</button>
+    <button class="chip region" data-region="us">美國</button>
+    <button class="chip region" data-region="jp">日本</button>
+    <button class="chip region" data-region="cn">中國</button>
+    <button class="chip region" data-region="tw">台灣</button>
+    <button class="chip region" data-region="me">中東</button>
+    <button class="chip region" data-region="global">全球</button>
+  </div>
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="🔍 關鍵字搜尋（標題、來源、摘要）…">
+  </div>
+</div>
+
+<main id="app"></main>
+
+<button id="toTop" title="回到頂部">↑</button>
+
+<footer>
+  <b>資料說明與免責聲明</b>
+  <div class="legend">
+    <span><i class="dot" style="background:var(--eu)"></i>歐洲</span>
+    <span><i class="dot" style="background:var(--us)"></i>美國</span>
+    <span><i class="dot" style="background:var(--jp)"></i>日本</span>
+    <span><i class="dot" style="background:var(--cn)"></i>中國</span>
+    <span><i class="dot" style="background:var(--tw)"></i>台灣</span>
+    <span><i class="dot" style="background:var(--me)"></i>中東</span>
+    <span><i class="dot" style="background:var(--global)"></i>全球</span>
+  </div>
+  本看板由自動化情報流程彙整公開網路資訊而成，僅供產業趨勢參考，不構成投資或採購建議。日期標記原則：能確認精確日期者標 <b>YYYY-MM-DD</b>；僅能確認年月者標 <b>YYYY-MM</b>；僅能確認年份或屬常青技術頁者以淺色徽章表示；無法確認者標「<b>日期待確認</b>」並排序於最後。標「<b>📌 精選收錄</b>」者為發布逾 3 個月但具代表性之市場報告或技術資料。本期日本（jp）地區未搜得符合門檻之同業一手動態或研究，故無收錄；相關數據多見於全球市場報告中。所有連結均為原始出處，內容以來源方為準。
+</footer>
+
+<script>
+const REGIONS={
+  eu:{name:'歐洲',color:'#2563eb'}, us:{name:'美國',color:'#dc2626'},
+  jp:{name:'日本',color:'#db2777'}, cn:{name:'中國',color:'#ea580c'},
+  tw:{name:'台灣',color:'#16a34a'}, me:{name:'中東',color:'#7c3aed'},
+  global:{name:'全球',color:'#6b7280'}
+};
+const SECTIONS=[
+  {id:'peer',name:'同業動態'},
+  {id:'research',name:'最新研究文獻'},
+  {id:'market',name:'應用效益及市場'},
+  {id:'equip',name:'製程設備及耐火材料'}
+];
+
+const DATA=[
+  // ===== 同業動態 peer =====
+  {sec:'peer',reg:'eu',date:'2026-07-31',sort:20260731,conf:true,feat:false,title:'Laterlite 推出 Nativus 連續無縫飾面系統（Nord Resine）',src:'Edilportale',url:'https://www.edilportale.com/news/2026/07/aziende/laterlite-presenta-nativus-le-superfici-continue-di-nord-resine_111491_5.html',sum:'旗下 Nord Resine 推出 Nativus 樹脂系連續無縫裝飾塗層，主打室內外無接縫、可搭配輕質底層的高性能表面系統。'},
+  {sec:'peer',reg:'eu',date:'2026-07',sort:20260701,conf:true,feat:false,title:'Laterlite 發表 GrasCalce 道路與鋪面解決方案',src:'Edilportale',url:'https://www.edilportale.com/news/2026/07/aziende/laterlite-le-soluzioni-grascalce-per-strade-e-pavimentazioni_111326_5.html',sum:'GrasCalce 系列擴大應用於道路與鋪面工程，切入基礎建設輕量化與路面修補市場。'},
+  {sec:'peer',reg:'eu',date:'2026-06-30',sort:20260630,conf:true,feat:false,title:'Filtralite 沙烏地吉達水廠實證：濁度 0.42 NTU、反洗減 50%',src:'AquaEnergy Expo Magazine',url:'https://mg.aquaenergyexpo.com/how-filtralite-proved-its-value-in-modern/',sum:'吉達 Package 01 水廠對比測試：膨脹黏土濾料 Filtralite 濁度低至 0.42 NTU（無煙煤 1.53 NTU），反洗頻率與時長各降達 50%，濾速 9.5 m/h。',regOverride:'me'},
+  {sec:'peer',reg:'me',date:'2026-06-30',sort:20260630,conf:true,feat:false,title:'Filtralite 沙烏地吉達水廠實證：濁度 0.42 NTU、反洗減 50%',src:'AquaEnergy Expo Magazine',url:'https://mg.aquaenergyexpo.com/how-filtralite-proved-its-value-in-modern/',sum:'吉達 Package 01 水廠對比測試：膨脹黏土濾料 Filtralite 濁度低至 0.42 NTU（無煙煤 1.53 NTU），反洗頻率與時長各降達 50%，濾速 9.5 m/h。'},
+  {sec:'peer',reg:'us',date:'2026-07-23',sort:20260723,conf:true,feat:false,title:'Arcosa 將於 8/5 公布 Q2 財報、因併購案取消法說會',src:'Business Wire',url:'https://www.businesswire.com/news/home/20260723558844/en/Arcosa-Inc.-to-Announce-Second-Quarter-2026-Results-on-August-5-2026',sum:'Arcosa 公告 8/5 發布第二季財報，因 CRH 每股 $150 併購案進行中不召開法說會與財測，反映輕質粒料龍頭整併進入收尾期。'},
+  {sec:'peer',reg:'us',date:'2026-06-22',sort:20260622,conf:true,feat:false,title:'CRH 以 85 億美元全現金收購 Arcosa（重大併購）',src:'Concrete Products',url:'https://concreteproducts.com/index.php/2026/06/22/crh-hardens-aggregates-infrastructure-market-stakes-in-8-5b-arcosa-deal/',sum:'CRH 以每股 $150、總額 85 億美元收購北美最大旋轉窯膨脹頁岩／黏土輕質粒料生產商 Arcosa（廠區含 AL、CA、KY、TX），預計 2027 年初完成。'},
+  {sec:'peer',reg:'eu',date:'2026-05-18',sort:20260518,conf:true,feat:false,title:'Laterlite 發布全新「樓板結構補強」技術指南',src:'Edilportale',url:'https://www.edilportale.com/news/2026/05/aziende/laterlite-presenta-la-nuova-guida-sul-consolidamento-dei-solai_110405_5.html',sum:'針對設計師與結構技師推出樓板輕量結構補強系統技術指南，強化 LWA 於既有建物加固的設計指定。'},
+  {sec:'peer',reg:'eu',date:'2026-05',sort:20260515,conf:true,feat:false,title:'Laterlite 參與米蘭歷史宮殿改建豪華飯店工程',src:'Edilportale',url:'https://www.edilportale.com/news/2026/05/aziende/laterlite-per-la-trasformazione-di-un-palazzo-milanese-in-hotel-di-lusso_110292_5.html',sum:'LWA 輕質找平／隔熱系統獲指定用於米蘭古建築改造五星飯店案，示範古蹟輕量化再利用。'},
+  {sec:'peer',reg:'eu',date:'2026-05',sort:20260505,conf:true,feat:false,title:'Filtralite 參展 IFAT Munich 2026 環保技術展',src:'IFAT / Messe München',url:'https://ifat.de/en/trade-fair/press/press-releases/detail/duration-of-ifat-munich-modified-for-2026.html',sum:'膨脹黏土濾料品牌 Filtralite 於全球最大水與環保展 IFAT（逾 3,300 家參展）展示 Pure／Clean／Air 濾料系列。'},
+  {sec:'peer',reg:'eu',date:'2026-05-04',sort:20260504,conf:true,feat:false,title:'Laterlite 推出 Nord Resine Beton Tack 附著底漆',src:'Edilportale',url:'https://www.edilportale.com/news/2026/05/aziende/laterlite-presenta-nord-resine-beton-tack_110202_5.html',sum:'即用型顆粒感附著底漆，專攻低吸收或不吸收基面，用於住宅、工業、商用場域的自平找平層施工。'},
+  {sec:'peer',reg:'cn',date:'2026',sort:20260601,conf:false,feat:false,title:'中國陶粒行業升級：智能化溫控燒結新產線、前六大廠僅約 17%',src:'格隆匯',url:'https://m.gelonghui.com/p/3424296',sum:'全品類（建築回填／園林／水處理／高強工業陶粒）發展，導入數位精準控溫智能燒結線；市場分散，前六大廠商僅約 17% 份額，龍頭如億柯、安徽陶盛、淮南中揚。'},
+  {sec:'peer',reg:'eu',date:'日期待確認',sort:0,conf:false,feat:false,title:'Leca International（Saint-Gobain）愛沙尼亞 Häädemeeste 廠擴產',src:'Saint-Gobain',url:'https://www.saint-gobain.com/en/news/leca-international-invest-additional-production-capacity-estonia',sum:'投資約 €2.5M 重啟 Fibo ExClay 膨脹黏土產線，年產能 35 萬 m³，供應波羅的海三國並外銷，看好波蘭—波海高鐵等基建需求。'},
+  {sec:'peer',reg:'us',date:'日期待確認',sort:0,conf:false,feat:false,title:'ESCSI：輕質粒料用於巴頓魯治 I-10 拓寬工程解決沉陷',src:'ESCSI',url:'https://www.escsi.org/e-newsletter/lightweight-aggregate-addresses-settlement-challenges-on-i-10-widening-in-baton-rouge/',sum:'膨脹頁岩黏土輕質粒料作為橋台後方擋土牆輕質回填，用於 LADOTD I-10 拓寬第二期，減輕軟弱地基沉陷。'},
+  {sec:'peer',reg:'me',date:'日期待確認',sort:0,conf:false,feat:false,title:'LECA（伊朗 Saveh 廠）興建第四條膨脹黏土產線',src:'Leca Asia',url:'https://leca.asia/coming-soon-the-biggest-leca-lightweight-aggregate-production-in-the-region/',sum:'現有 3 條輕質粒料產線（年產能 75 萬 m³）與輕質磚 3 線（年 3,500 萬塊），正興建第 4 條膨脹黏土線，將成亞洲及中東最大膨脹黏土產能。'},
+  {sec:'peer',reg:'tw',date:'日期待確認',sort:0,conf:false,feat:false,title:'台灣以水庫淤泥與再生玻璃燒製輕質骨材，結構減重 20–30%',src:'內政部建築研究所 ABRI',url:'https://www.abri.gov.tw/News_Content_Table.aspx?n=807&s=37769',sum:'以石門水庫淤泥於 1,100–1,200°C 旋轉窯燒製高強黏土陶粒，同級輕質混凝土可較普通混凝土減重 20–30%，並推進再生玻璃發泡輕質骨材。'},
+
+  // ===== 最新研究文獻 research =====
+  {sec:'research',reg:'eu',date:'2026-07-06',sort:20260706,conf:true,feat:false,title:'結構型輕質地聚合物混凝土之力學與高溫性能',src:'Scientific Reports (Nature)',url:'https://www.nature.com/articles/s41598-026-60402-3',sum:'常溫養護結構型輕質地聚合物混凝土（浮石骨料），於 150–750°C 高溫下較常重地聚合物混凝土保有更佳殘餘強度與結構完整性，並附 LCA 評估。（土耳其團隊）'},
+  {sec:'research',reg:'cn',date:'2026-07',sort:20260701,conf:false,feat:false,title:'再生混凝土細粉粒徑與核殼設計對冷結人工輕質骨料之影響',src:'Journal of Building Engineering',url:'https://www.sciencedirect.com/science/article/abs/pii/S2352710226015986',sum:'以建築拆除細粉（RCF<4.75mm）調整粒徑並導入核殼設計冷結製低碳粒料（CALA），粒徑與核殼協同提升強度、降低吸水；碳排較燒結骨料低約 52.2%。'},
+  {sec:'research',reg:'global',date:'2026-06-23',sort:20260623,conf:true,feat:false,title:'多源工業副產物於地聚合物人工粒料之永續化利用綜合評估',src:'Frontiers in Built Environment',url:'https://www.frontiersin.org/journals/built-environment/articles/10.3389/fbuil.2026.1864339/full',sum:'系統評估多源工業副產物（如沖天爐爐渣，每噸鑄鐵約產 50 kg 渣）用於地聚合物人工粒料之製程與性能。（印度團隊）'},
+  {sec:'research',reg:'cn',date:'2026-05-29',sort:20260529,conf:true,feat:false,title:'陶粒粒徑與取代率對輕質混凝土滲透性之孔隙結構與分形分析',src:'Materials (MDPI)',url:'https://www.mdpi.com/1996-1944/19/11/2305',sum:'以壓汞法與分形理論分析陶粒粒徑與取代率對輕質混凝土滲透性及孔隙結構之影響，最佳配比可降低孔隙連通性。'},
+  {sec:'research',reg:'cn',date:'2026-05-21',sort:20260521,conf:true,feat:false,title:'以循環流化床飛灰與多固廢製低碳核殼人工輕質骨料（RSM）',src:'SSRN (Elsevier 預印本)',url:'https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6810982',sum:'以廢加氣混凝土為核、CFB 粉煤灰＋脫硫石膏＋電石渣為殼冷結製核殼粒料；鬆散密度 769 kg/m³、圓柱抗壓 7.2 MPa、淨碳排 140.6 kg CO₂-eq/m³（較燒結頁岩陶粒低 74%）。'},
+  {sec:'research',reg:'global',date:'2026',sort:20260601,conf:false,feat:false,title:'以鋁渣與廢玻璃製燒結人工骨料：強度、微結構與 LWAC 界面',src:'Journal of Building Engineering',url:'https://www.sciencedirect.com/science/article/abs/pii/S2352710226002895',sum:'黏土:鋁渣=60:40 摻 20% 廢玻璃、1250°C 燒結，堆積密度最低 516 kg/m³、破碎強度 3.2 MPa；製成 LWAC 28 天抗壓 39.2 MPa、密度 1884 kg/m³，穩定重金屬。（馬來西亞團隊）'},
+  {sec:'research',reg:'cn',date:'2026',sort:20260601,conf:false,feat:false,title:'煤矸石骨料混凝土綜述：從原料到結構行為',src:'Low-carbon Materials and Green Construction (Springer)',url:'https://link.springer.com/article/10.1007/s44242-026-00107-y',sum:'煤矸石（含煤矸石陶粒）骨料混凝土從原料、力學、耐久到結構行為與 LCA 之系統綜述，並整理改質提升策略。'},
+  {sec:'research',reg:'cn',date:'2026',sort:20260501,conf:false,feat:false,title:'纖維強化對煤矸石混凝土力學、耐久與永續性之綜述',src:'Materials (MDPI)',url:'https://www.mdpi.com/1996-1944/19/10/2120',sum:'綜整纖維強化對煤矸石（多孔、弱界面）混凝土之力學、耐久與永續性影響及改善策略。'},
+  {sec:'research',reg:'global',date:'2026-04-28',sort:20260428,conf:true,feat:true,title:'工業廢棄物再利用於永續建材綜述',src:'Buildings (MDPI) 16(9),1741',url:'https://www.mdpi.com/2075-5309/16/9/1741',sum:'工業廢棄物再利用於永續建材綜述，指出 CDW 再生骨料可達 100% 取代天然骨料，並警示廢料變異性與重金屬溶出風險。'},
+  {sec:'research',reg:'cn',date:'2026-04-16',sort:20260416,conf:true,feat:true,title:'奈米複合材料強化浮石混凝土之力學與微結構研究',src:'Buildings (MDPI) 16(8),1579',url:'https://www.mdpi.com/2075-5309/16/8/1579',sum:'以奈米複合材料強化浮石骨料，處理後浮石吸水率下降 17.6%、圓柱抗壓提升，改善基材—骨料界面。（內蒙古農業大學等）'},
+  {sec:'research',reg:'global',date:'2026-03-06',sort:20260306,conf:true,feat:true,title:'工業廢棄物基人工骨料之性能與發展系統性回顧',src:'Frontiers in Built Environment',url:'https://www.frontiersin.org/journals/built-environment/articles/10.3389/fbuil.2026.1746167/full',sum:'系統性回顧工業廢棄物基人工粒料製程與性能，指出人工粒料比重較天然骨料低 15–30%。'},
+  {sec:'research',reg:'global',date:'2026-02-19',sort:20260219,conf:true,feat:true,title:'工業副產物地聚合物人工骨料取代磚骨料：強度、耐久與碳足跡',src:'J. Material Cycles and Waste Management (Springer)',url:'https://link.springer.com/article/10.1007/s10163-026-02513-7',sum:'以鹼激發污泥灰、粉煤灰與焚化醫療灰製地聚合物人工粗骨料取代磚骨料，評估抗壓強度、耐久性與碳足跡（循環經濟導向）。（孟加拉團隊）'},
+  {sec:'research',reg:'cn',date:'2026',sort:20260201,conf:false,feat:false,title:'煤矸石混凝土雙路徑利用綜述：骨料取代＋膠凝活性激發',src:'Buildings (MDPI) 16(2),302',url:'https://www.mdpi.com/2075-5309/16/2/302',sum:'綜述煤矸石於混凝土「骨料取代＋膠凝活性激發」雙路徑利用及性能優化與環境效益。'},
+  {sec:'research',reg:'global',date:'2026-01-15',sort:20260115,conf:true,feat:true,title:'椰殼骨料與鋼纖維強化輕質地聚合物混凝土之力學與耐久性',src:'Engineering Research Express (IOP)',url:'https://iopscience.iop.org/article/10.1088/2631-8695/ae3368',sum:'以椰殼骨料取代 EPS 並摻鋼纖維，抗壓由 5.01 提升至 21.38 MPa（扭轉纖維），抗拉／抗彎 3.90／5.65 MPa，吸水率低至 0.14 mm/min^0.5。（印度團隊）'},
+
+  // ===== 應用效益及市場 market =====
+  {sec:'market',reg:'global',date:'2026-06',sort:20260601,conf:true,feat:false,title:'建築骨材市場報告 2026：CAGR 6.3%',src:'openPR / The Business Research Company',url:'https://www.openpr.com/news/4569414/construction-aggregate-market-report-2026-market-outlook',sum:'全球建築骨材（含輕質骨材）自 2025 年 USD 430.1B 增至 2026 年 USD 457.57B（CAGR 6.4%），2030 年達 USD 584.68B（CAGR 6.3%）。'},
+  {sec:'market',reg:'global',date:'2026-05-04',sort:20260504,conf:true,feat:false,title:'輕質骨材混凝土市場以 8.6% CAGR 加速成長',src:'openPR / Verified Market Reports',url:'https://www.openpr.com/news/4499771/lightweight-aggregate-concrete-market-size-accelerates-at-8-6',sum:'市場自 2024 年 USD 11.8B 成長至 2033 年 USD 24.5B，2026–2033 CAGR 8.6%；主要業者含 Holcim、Cemex、Heidelberg、Boral、CRH、UltraTech。'},
+  {sec:'market',reg:'global',date:'2026-04-24',sort:20260424,conf:true,feat:true,title:'輕量材料研究報告 2026：市場達 2,644.8 億美元',src:'GlobeNewswire',url:'https://www.globenewswire.com/news-release/2026/04/24/3280678/28124/en/lightweight-materials-research-report-2026-264-48-bn-market-opportunities-trends-competitive-landscape-strategies-and-forecasts-2020-2025-2025-2030f-2035f.html',sum:'全球輕量材料（含輕質骨材為子區隔）市場規模達 USD 264.48 billion，涵蓋 2025–2030F、2035F 預測，永續與輕量化為主要驅動力。'},
+  {sec:'market',reg:'me',date:'2026-04-13',sort:20260413,conf:true,feat:true,title:'沙烏地阿拉伯輕質骨材混凝土產業報告（預測至 2030）',src:'GlobeNewswire',url:'https://www.globenewswire.com/news-release/2026/04/13/3272379/28124/en/saudi-arabia-lightweight-aggregate-concrete-industry-report-2025-size-share-growth-drivers-trends-opportunities-forecast-to-2030.html',sum:'沙國輕質骨材混凝土市場約 USD 1.1 billion，受 Vision 2030 基建與永續建材需求推動；2025Q4–2026Q2 混凝土供應量增 13%。'},
+  {sec:'market',reg:'global',date:'2026-02-20',sort:20260220,conf:true,feat:true,title:'骨材市場報告 2025–2033：永續與再生骨材驅動成長',src:'GlobeNewswire',url:'https://www.globenewswire.com/news-release/2026/02/20/3241857/28124/en/Aggregates-Market-Report-2025-2033-Growth-Driven-by-Rising-Adoption-of-Sustainable-and-Recycled-Aggregates-Infrastructure-Developments-and-Construction-and-Real-Estate-Expansion.html',sum:'全球骨材市場（含輕質／再生骨材）成長動力來自永續與再生骨材採用、基建與不動產擴張，涵蓋 2025–2033 預測。'},
+  {sec:'market',reg:'global',date:'2026-02-02',sort:20260202,conf:true,feat:true,title:'膨脹黏土市場成長：建築需求帶動，2033 達 51 億美元',src:'AP News Media（引 Market Research Future）',url:'https://apsnewsmedia.wordpress.com/2026/02/02/expanded-clay-market-growth-driven-by-rising-demand-in-construction/',sum:'全球膨脹黏土市場 2026 年約 USD 3.3B，2033 年達 USD 5.1B，2026–2033 CAGR 6.4%，受永續建築與輕質骨材採用推動。'},
+  {sec:'market',reg:'us',date:'2025-11-24',sort:20251124,conf:true,feat:true,title:'美國輕質骨材市場 38.6 億美元（2025–2030 預測）',src:'GlobeNewswire',url:'https://www.globenewswire.com/news-release/2025/11/24/3193699/0/en/United-States-3-86-Bn-Lightweight-Aggregates-Market-Trends-Regional-Insights-Competition-Forecast-Opportunities-2020-2024-2025-2030.html',sum:'美國輕質骨材市場達 USD 3.86 billion；北美 2025 年占全球約 34% 最大份額，受逾 USD 2 兆營建支出與 LEED 綠建材採用帶動。'},
+  {sec:'market',reg:'global',date:'2026',sort:20260101,conf:false,feat:false,title:'輕質膨脹黏土骨材（LECA）市場展望',src:'Verified Market Reports',url:'https://www.verifiedmarketreports.com/product/lightweight-expanded-clay-aggregate-leca-market/',sum:'LECA 市場自 2024 年 USD 2.3B 成長至 2033 年 USD 4.5B，2026–2033 CAGR 8.1%；LECA 可貢獻 LEED 認證點數。'},
+  {sec:'market',reg:'global',date:'2025',sort:20250601,conf:false,feat:true,title:'輕質骨材市場 2030 年達 155.2 億美元（MarketsandMarkets）',src:'PR Newswire',url:'https://www.prnewswire.com/news-releases/lightweight-aggregates-market-worth-15-52-billion-by-2030--exclusive-report-by-marketsandmarkets-302415360.html',sum:'全球輕質骨材自 2025 年 USD 13.14B 成長至 2030 年 USD 15.52B，CAGR 3.4%；亞太約占 50%、中國約占全球 40% 需求。'},
+  {sec:'market',reg:'global',date:'2026',sort:20260601,conf:false,feat:false,title:'以廢棄物製輕質骨料的比較性生命週期評估（循環經濟）',src:'Construction and Building Materials',url:'https://www.sciencedirect.com/science/article/pii/S0950061826022890',sum:'後工業回收塑膠可部分替代粗骨材製結構輕質混凝土，建立廢棄物轉資源途徑，減少原生骨材開採並降低碳足跡。'},
+  {sec:'market',reg:'us',date:'頁面現行',sort:0,conf:false,feat:false,title:'LEED 評分系統與輕質骨材：58% 認證建築採用',src:'ESCSI',url:'https://www.escsi.org/sustainability-without-compromise/leed-rating-system/',sum:'輕質骨材混凝土可降低結構自重達 30%、HVAC 能耗較傳統低 20–25%；2023 年約 58% LEED 認證建築採用輕質骨材以取得低碳／再生材料點數。'},
+  {sec:'market',reg:'us',date:'頁面現行',sort:0,conf:false,feat:false,title:'輕質骨材的環境衝擊（LCA／隱含碳）',src:'ESCSI',url:'https://www.escsi.org/environmental-impacts-of-lightweight-aggregate/',sum:'骨材占混凝土體積達 70%，但僅占 A1–A3 排放的 1–5%；某輕質混凝土情境隱含能耗最低 10,520 MMBTU，低於一般混凝土 10,660 MMBTU。'},
+  {sec:'market',reg:'us',date:'頁面現行',sort:0,conf:false,feat:false,title:'輕質骨材於地工填方之效益：密度降 50%',src:'Arcosa Lightweight',url:'https://arcosalightweight.com/faq/faq-lightweight-geotechnical-fills/',sum:'輕質骨材可使地工填方密度降低達 50%、側向力減少逾 50%，降低沉陷與擋土／樁基需求，兼具成本效益與施工速度。'},
+  {sec:'market',reg:'eu',date:'頁面現行',sort:0,conf:false,feat:false,title:'以 Leca 輕質骨材混凝土進行離岸營建（浮式風電）',src:'Leca International (UK)',url:'https://www.leca.co.uk/Offshore-Concrete-Construction',sum:'結構輕質骨材混凝土（SLWAC）用於浮式離岸風機平台可提升浮力、單位重更低、隔熱與耐久更佳，延長海洋結構服務年限。'},
+  {sec:'market',reg:'tw',date:'頁面現行',sort:0,conf:false,feat:false,title:'再生綠建材評估：焚化底渣／廢玻璃製輕質粒料',src:'台灣建築中心 綠建材標章',url:'https://gbm.tabc.org.tw/modules/pages/regeneration',sum:'營建廢棄物、焚化底渣、廢玻璃／陶瓷、鋼碴等經處理可製混凝土輕質粒料；EEWH 綠建築系統含 CO2 減量、廢棄物減量等 9 指標，推動資源再利用。'},
+
+  // ===== 製程設備及耐火材料 equip =====
+  {sec:'equip',reg:'cn',date:'2026-05-18',sort:20260518,conf:true,feat:false,title:'濕地治理複合生物濾料：污泥基改性陶粒產線',src:'網易新聞（河北）',url:'https://hb.news.163.com/26/0518/16/KT7P41GK04089AUO.html',sum:'以市政污泥高溫（1000°C+）燒製生物陶粒濾料，年處理污泥約 20 萬噸、年產陶粒 40 萬 m³，掛膜啟動 4–15 天、COD 去除 60–90%。'},
+  {sec:'equip',reg:'cn',date:'2026',sort:20260601,conf:false,feat:false,title:'2026 電磁回轉窯技術演進：下一代節能煅燒標準',src:'xudoodoo 產業分析',url:'https://xudoodoo.com/Article-Mjg1NQ-28271.html',sum:'將電磁感應加熱融入回轉窯的新型設備，基礎熱效率達 95%、綜合節能率穩定於 25–35%，指向陶粒／煅燒窯電氣化與去碳方向。'},
+  {sec:'equip',reg:'global',date:'2026',sort:20260601,conf:false,feat:false,title:'AI 驅動回轉窯能耗優化 2026：熱耗降 5.4%',src:'iFactory',url:'https://ifactoryapp.com/industries/cement-plant/ai-cement-kiln-energy-optimization-fuel-cost-2026',sum:'以 AI 窯爐優化（燃燒器調校、風量分配、數位孿生）可降低熱耗約 5.4%；燃料佔營運成本近 50%、窯爐佔全廠能耗 30–40% 為改善標的。'},
+  {sec:'equip',reg:'cn',date:'2026',sort:20260601,conf:false,feat:false,title:'中國工業窯爐裝備 2026：產線總包與海外擴張',src:'天下工廠產業研究院',url:'https://faxiangongchang.com/reports/china-industrial-kiln-furnace-2026',sum:'盤點中材國際、凱盛科技、唐山賀祥、北方重工等回轉窯／輥道窯總包商，趨勢指向大直徑大型化、高能效與「過程優化—餘熱回收」全鏈條節能。'},
+  {sec:'equip',reg:'cn',date:'2026',sort:20260601,conf:false,feat:false,title:'回轉窯耐火壽命 2026 技術指南：分區選材',src:'Highland Refractory',url:'https://www.highlandrefractory.com/refractory-service-life-in-cement-rotary-kilns-2026-technical-guide.html',sum:'回轉窯燒成帶 1400–1500°C 內襯壽命管理指南，強調分區選材（高鋁 55–85% Al₂O₃、鎂鋁尖晶石磚）與替代燃料／高轉速下的應力因應。'},
+  {sec:'equip',reg:'cn',date:'2026',sort:20260601,conf:false,feat:false,title:'回轉窯澆注料 2026 指南：低水泥抗磨蝕配方',src:'Kerui Refractory',url:'https://keruirefra.com/castable-refractory-cement-the-2026-guide/',sum:'涵蓋回轉窯窯口、預熱器、冷卻段用高鋁與碳化矽基澆注料、低水泥澆注料（LCC）配方，訴求抗熟料粉塵磨蝕、降熱損、減結皮。'},
+  {sec:'equip',reg:'cn',date:'2026',sort:20260601,conf:false,feat:false,title:'2026 市政污泥脫水技術全景：設備選型與趨勢',src:'長三角城市網',url:'https://www.csjcs.com/news/shangxun/Article-pZECaU-401036.html',sum:'系統盤點含水污泥脫水（板框壓濾等）與後端供料設備選型，為污泥複合原料進窯前的計量／減量前處理環節提供設備對照。'},
+  {sec:'equip',reg:'us',date:'2025-06-13',sort:20250613,conf:true,feat:true,title:'膨脹黏土骨料生產用回轉窯技術（FEECO）',src:'FEECO International',url:'https://feeco.com/rotary-kilns-in-expanded-clay-aggregate-production/',sum:'詳解 LECA 生產採直燃逆流式回轉窯，煅燒溫度 1050–1250°C，並列影響膨脹的四大製程參數（溫度、黏土粒徑、球團尺寸、停留時間）與中試測試流程。'},
+  {sec:'equip',reg:'global',date:'2025-11-28',sort:20251128,conf:true,feat:true,title:'耐火材料市場報告 2026–2035：不定形澆注料成長最快',src:'GlobeNewswire',url:'https://www.globenewswire.com/news-release/2025/11/28/3196126/0/en/Refractory-Material-Market-Size-Share-Trends-Analysis-Report-2026-2035.html',sum:'指出不定形（澆注料／單體）耐火材為成長最快品類，因抗熱震佳廣用於水泥／回轉窯、預熱器與分解爐，並帶動免升溫恆溫低水泥澆注料需求。'},
+  {sec:'equip',reg:'cn',date:'日期待確認',sort:0,conf:false,feat:false,title:'200 m²/日 頁岩回轉窯黏土陶粒生產線',src:'Made-in-China（HK Rotary Kiln）',url:'https://hkrotarykiln.en.made-in-china.com/product/VSTmbPgARtpz/China-200m2-Per-Day-Shale-Rotary-Kiln-Clay-Ceramsite-Production-Line.html',sum:'以頁岩／黏土為原料的整線回轉窯陶粒產線（日產 200 m²），含破碎、成球、燒成、收塵配套，年產能可對應 5–60 萬 m³ 級距。'},
+  {sec:'equip',reg:'us',date:'日期待確認',sort:0,conf:false,feat:false,title:'輕質粒料窯低 NOx 燃燒器技術（ESCSI）',src:'ESCSI',url:'https://www.escsi.org/e-newsletter/nox-reduction-lightweight-aggregate-kilns/',sum:'低 NOx 窯用燃燒器技術，一次風量佔化學計量燃燒空氣 15–40%、高速噴嘴誘導二次風，為輕質粒料窯減排的關鍵設備升級。'},
+  {sec:'equip',reg:'cn',date:'日期待確認',sort:0,conf:false,feat:false,title:'BRICTEC 磚瓦原料處理設備：雙軸攪拌機／輪碾機',src:'西安 Brictec Engineering',url:'https://www.claybrickmakingmachinery.com/sale-48442507-brictec-brick-raw-material-preparation-equipment-soft-material-crushing-industrial-roller-mill.html',sum:'磚瓦業共用原料處理線，含箱式給料機、破碎機、雙軸攪拌機（DM50/60/75）與輪碾機，適用黏土、頁岩、煤矸石、粉煤灰混練，與陶粒前處理高度共用。'},
+  {sec:'equip',reg:'us',date:'日期待確認',sort:0,conf:false,feat:false,title:'Mix-Muller 密閉式強力輪碾混拌機（Simpson）',src:'Simpson Group',url:'https://www.simpsongroup.com/process/ceramics/',sum:'Simpson Mix-Muller® 中速強力輪碾式混拌機，專用於耐火材、耐火磚、陶瓷磚與塑性黏土的混練造粒，可提升坯體密實度、降低內應力。'},
+  {sec:'equip',reg:'eu',date:'日期待確認',sort:0,conf:false,feat:false,title:'ANDRITZ DDS 滾筒乾燥造粒系統（污泥前處理）',src:'ANDRITZ',url:'https://www.andritz.com/products-en/separation/convective-dryers/drum-drying-system-dds',sum:'三通道滾筒對流乾燥系統，可同時乾燥並造粒各類污泥至殘水 <10%；最大滾筒達 φ4.6 m×17 m、可純用水泥窯廢氣為熱源達 90% 乾固率，適配污泥供料前處理。'},
+  {sec:'equip',reg:'cn',date:'日期待確認',sort:0,conf:false,feat:false,title:'污泥陶粒生產線（膨脹黏土＋污泥複合原料整線）',src:'溧陽蘇材機械',url:'https://www.lysucai.com/en/clay-aggregate-industry/sludge-ceramsite-production-line/',sum:'自 2007 年起以輕質膨脹黏土＋污泥為原料的整線設備，經盤式混拌機混成半乾料，可摻建築廢料、粉煤灰、爐渣以降低原料成本。'}
+];
+
+// 去重：peer 的 Filtralite 吉達同時列了 me 與 regOverride，移除 override 佔位
+const CLEAN=DATA.filter(d=>!d.regOverride);
+
+const secFilterEl=document.getElementById('secFilters');
+const regFilterEl=document.getElementById('regFilters');
+const searchEl=document.getElementById('search');
+const app=document.getElementById('app');
+
+let curSec='all', curReg='all', curQ='';
+
+function build(){
+  app.innerHTML='';
+  SECTIONS.forEach(s=>{
+    const wrap=document.createElement('section');
+    wrap.className='section';
+    wrap.dataset.sec=s.id;
+    wrap.innerHTML=`<div class="section-head"><span class="bar"></span><h2>${s.name}</h2><span class="cnt" id="cnt-${s.id}"></span></div><div class="grid" id="grid-${s.id}"></div>`;
+    app.appendChild(wrap);
+  });
+  const empty=document.createElement('div');
+  empty.className='empty hidden';
+  empty.id='empty';
+  empty.textContent='沒有符合條件的資訊';
+  app.appendChild(empty);
+}
+
+function cardHTML(d){
+  const rg=REGIONS[d.reg];
+  const soft=d.conf?'':'soft';
+  const pin=d.feat?'<span class="pin">📌</span>':'';
+  return `<article class="card">
+    <div class="card-top">
+      <span class="date-badge ${soft}">${pin}${d.date}</span>
+      <span class="region-tag" style="background:${rg.color}">${rg.name}</span>
+    </div>
+    <h3><a href="${d.url}" target="_blank" rel="noopener">${d.title}</a></h3>
+    <div class="src"><a href="${d.url}" target="_blank" rel="noopener">${d.src} <span class="ext">↗</span></a></div>
+    <div class="sum">${d.sum}</div>
+  </article>`;
+}
+
+function render(){
+  let total=0;
+  SECTIONS.forEach(s=>{
+    const grid=document.getElementById('grid-'+s.id);
+    const wrap=app.querySelector(`.section[data-sec="${s.id}"]`);
+    let items=CLEAN.filter(d=>d.sec===s.id);
+    // 篩選
+    items=items.filter(d=>{
+      if(curSec!=='all' && d.sec!==curSec) return false;
+      if(curReg!=='all' && d.reg!==curReg) return false;
+      if(curQ){
+        const hay=(d.title+d.src+d.sum).toLowerCase();
+        if(!hay.includes(curQ)) return false;
+      }
+      return true;
+    });
+    // 排序：sort 由大到小；0（待確認／常青頁）排最後
+    items.sort((a,b)=>{
+      if(a.sort===0 && b.sort===0) return 0;
+      if(a.sort===0) return 1;
+      if(b.sort===0) return -1;
+      return b.sort-a.sort;
+    });
+    grid.innerHTML=items.map(cardHTML).join('');
+    document.getElementById('cnt-'+s.id).textContent='目前顯示 '+items.length+' 則';
+    // 若區塊篩選限定其他區塊，隱藏本區塊
+    const showSection=(curSec==='all'||curSec===s.id);
+    wrap.classList.toggle('hidden', !showSection || items.length===0);
+    if(showSection) total+=items.length;
+  });
+  document.getElementById('empty').classList.toggle('hidden', total>0);
+}
+
+// 事件
+secFilterEl.addEventListener('click',e=>{
+  const b=e.target.closest('.chip'); if(!b)return;
+  secFilterEl.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+  b.classList.add('active'); curSec=b.dataset.section; render();
+});
+regFilterEl.addEventListener('click',e=>{
+  const b=e.target.closest('.chip'); if(!b)return;
+  regFilterEl.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+  b.classList.add('active'); curReg=b.dataset.region; render();
+});
+searchEl.addEventListener('input',e=>{ curQ=e.target.value.trim().toLowerCase(); render(); });
+
+// 回到頂部
+const toTop=document.getElementById('toTop');
+window.addEventListener('scroll',()=>{ toTop.classList.toggle('show', window.scrollY>400); });
+toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+build(); render();
+</script>
+</body>
+</html>
